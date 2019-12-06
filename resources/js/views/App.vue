@@ -2,7 +2,7 @@
   <div id="app">
     <h3>Bowling!</h3>
       <div>
-        <score-card :bowlingFrames="bowlingFrames" :rolls="rolls" :disabledBtns="disabledBtns" :gameOver="gameOver"></score-card >
+        <score-card :bowlingFrames="bowlingFrames" :rolls="rolls" :test="false" :disabledBtns="disabledBtns" :gameOver="gameOver" v-on:pinBtnClick="test = true"></score-card >
     </div>
   </div>
 </template>

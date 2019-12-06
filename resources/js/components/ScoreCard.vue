@@ -1,7 +1,6 @@
 <template>
 <div>
-	<p>Select number of pins knocked over</p>
-	<button id="btn0" type="button" class="btn" :disabled='disabledBtnArr.includes(0)' title="no pins knocked over" @click="pinBtnClick(0, rollArr, frameArr, disabledBtnArr, gameOverArr)" value="0">0</button>
+	<p v-if="!gameOverArr[0]">Select number of pins knocked over</p>
 	<button id="btn1" type="button" class="btn" :disabled='disabledBtnArr.includes(1)' title="1 pin knocked over" @click="pinBtnClick(1, rollArr, frameArr, disabledBtnArr, gameOverArr)" value="1">1</button>
 	<button id="btn2" type="button" class="btn" :disabled='disabledBtnArr.includes(2)' title="2 pins knocked over" @click="pinBtnClick(2, rollArr, frameArr, disabledBtnArr, gameOverArr)" value="2">2</button>
 	<button id="btn3" type="button" class="btn" :disabled='disabledBtnArr.includes(3)' title="3 pins knocked over" @click="pinBtnClick(3, rollArr, frameArr, disabledBtnArr, gameOverArr)" value="3">3</button>
@@ -26,7 +25,7 @@
 <script type = "text/javascript" >
 import Frame from '@/js/components/Frame';
 export default {
-	props: ['bowlingFrames', 'rolls', 'disabledBtns', 'gameOver'],
+	props: ['bowlingFrames', 'rolls', 'disabledBtns', 'gameOver', 'test'],
 	components: {
 		Frame,
 	},
@@ -35,13 +34,12 @@ export default {
 			rollArr: this.rolls,
 			frameArr: this.bowlingFrames,
 			disabledBtnArr: this.disabledBtns,
-			gameOverArr: this.gameOver
+			gameOverArr: this.gameOver,
+			test: this.test
 		}
 	},	
 	methods: {
 		pinBtnClick(pins, rollArr, frameArr, disabledBtnArr, gameOverArr) {
-			console.log("pinBtnClick", rollArr, disabledBtnArr.length, gameOverArr);
-
 			let lastActiveBtn = 10 - pins;
 			// if this was a second roll (or a strike), enable all pin buttons
 			if (disabledBtnArr.length > 0 || pins == 10) {
@@ -150,14 +148,14 @@ p {
 	font-size: 15px;
 	border-radius: 3px;
 	background-color: #cecece;
+	display: inline-block;
 }
 .btn:disabled {
-	background-color: #666;
-	color: #ccc;
+	display: none;
 }
 .game-over-box {
 	display: inline-block;
-	margin-left: 50px;
+	margin-left: 10px;
 	vertical-align: top;
 	border: solid black 2px;
 	width: 180px;

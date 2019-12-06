@@ -19,19 +19,22 @@ class ScoreController extends Controller {
 		return false;
 	}
 	
-	public function extraScoreForStrike($roll_index) {	
+	public function extraScoreForStrike($roll_index) {
 		// check if next roll is a strike
-		if (isset($this->rolls[$roll_index + 2]) && $this->rolls[$roll_index + 2] == 10 && isset($this->rolls[$roll_index + 4])) {			
+		if (isset($this->rolls[$roll_index + 2]) && $this->rolls[$roll_index + 2] == 10 && isset($this->rolls[$roll_index + 4]) && $roll_index != 16) {
 			return $this->rolls[$roll_index + 2] + $this->rolls[$roll_index + 4];
 		}
-		else if (isset($this->rolls[$roll_index + 2]) && isset($this->rolls[$roll_index + 3])) {			
+		else if (isset($this->rolls[$roll_index + 2]) && isset($this->rolls[$roll_index + 3])) {		
 			return $this->rolls[$roll_index + 2] + $this->rolls[$roll_index + 3];
 		}
 		return false;		
 	}
 	
-	public function extraScoreForStrikeTenthFrame($roll_index) {
-		if (isset($this->rolls[$roll_index + 1]) && isset($this->rolls[$roll_index + 2])) {
+	public function extraScoreForStrikeTenthFrame($roll_index) {	
+		if ($roll_index == 19 && isset($this->rolls[$roll_index + 1])) {
+			return $this->rolls[$roll_index] + $this->rolls[$roll_index + 1];
+		}
+		else if (isset($this->rolls[$roll_index + 1]) && isset($this->rolls[$roll_index + 2])) {
 			return $this->rolls[$roll_index + 1] + $this->rolls[$roll_index + 2];
 		}
 		return false;		
@@ -101,7 +104,7 @@ class ScoreController extends Controller {
 			}		
 			for ($frame = 1; $frame <= $current_frame; $frame++) {
 				if ($this->checkForStrike($roll_index)) {
-					// 10th frame scoring rules
+					// 10th frame scoring rules$
 					if ($frame == 10 && $current_frame == 10) {
 						$update_score = $this->extraScoreForStrikeTenthFrame($roll_index);
 						if ($update_score != false) {

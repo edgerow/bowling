@@ -1825,10 +1825,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['bowlingFrames', 'rolls', 'disabledBtns', 'gameOver'],
+  props: ['bowlingFrames', 'rolls', 'disabledBtns', 'gameOver', 'test'],
   components: {
     Frame: _js_components_Frame__WEBPACK_IMPORTED_MODULE_0__["default"]
   },
@@ -1837,12 +1836,12 @@ __webpack_require__.r(__webpack_exports__);
       rollArr: this.rolls,
       frameArr: this.bowlingFrames,
       disabledBtnArr: this.disabledBtns,
-      gameOverArr: this.gameOver
+      gameOverArr: this.gameOver,
+      test: this.test
     };
   },
   methods: {
     pinBtnClick: function pinBtnClick(pins, rollArr, frameArr, disabledBtnArr, gameOverArr) {
-      console.log("pinBtnClick", rollArr, disabledBtnArr.length, gameOverArr);
       var lastActiveBtn = 10 - pins; // if this was a second roll (or a strike), enable all pin buttons
 
       if (disabledBtnArr.length > 0 || pins == 10) {
@@ -6525,7 +6524,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\np[data-v-26840de7] {\n  margin: 10px;\n}\n.btn[data-v-26840de7] {\n\twidth: 50px;\n\tpadding: 5px;\n\tborder: 2px;\n\tmargin: 5px;\n\tfont-size: 15px;\n\tborder-radius: 3px;\n\tbackground-color: #cecece;\n}\n.btn[data-v-26840de7]:disabled {\n\tbackground-color: #666;\n\tcolor: #ccc;\n}\n.game-over-box[data-v-26840de7] {\n\tdisplay: inline-block;\n\tmargin-left: 50px;\n\tvertical-align: top;\n\tborder: solid black 2px;\n\twidth: 180px;\n\theight: 60px;\n\tline-height: 12px;\n\ttext-align: center;\n\tfont-weight: bold;\n\tfont-size: 18px;\n}\n#new-game-btn[data-v-26840de7] {\n\tvertical-align: top;\n\tfont-weight: bold;\n\tfont-size: 12px;\n}\n#new-game-btn[data-v-26840de7] {\n\ttext-decoration: none;\n\tcolor: #0c0;\n}\n#new-game-btn[data-v-26840de7]:hover {\n\ttext-decoration: underline;\n}\n.final-score-box[data-v-26840de7] {\n\tfloat: right;\n\tmargin-right: 40px;\n\tvertical-align: top;\n\tborder: solid black 2px;\n\twidth: 120px;\n\theight: 90px;\n}\n.header[data-v-26840de7] {\n\tborder: solid gray 1px;\n\ttext-align: center;\n\tfont-size: 18px;\n\tfont-weight: bold;\n\tline-height: 30px;\n}\n.total[data-v-26840de7] {\n\twidth: 120px;\n\theight: 80px;\n\tvertical-align: top;\n\tline-height: 40px;\n\ttext-align: center;\n\tfont-size: 18px;\n}\n", ""]);
+exports.push([module.i, "\np[data-v-26840de7] {\n  margin: 10px;\n}\n.btn[data-v-26840de7] {\n\twidth: 50px;\n\tpadding: 5px;\n\tborder: 2px;\n\tmargin: 5px;\n\tfont-size: 15px;\n\tborder-radius: 3px;\n\tbackground-color: #cecece;\n\tdisplay: inline-block;\n}\n.btn[data-v-26840de7]:disabled {\n\tdisplay: none;\n}\n.game-over-box[data-v-26840de7] {\n\tdisplay: inline-block;\n\tmargin-left: 10px;\n\tvertical-align: top;\n\tborder: solid black 2px;\n\twidth: 180px;\n\theight: 60px;\n\tline-height: 12px;\n\ttext-align: center;\n\tfont-weight: bold;\n\tfont-size: 18px;\n}\n#new-game-btn[data-v-26840de7] {\n\tvertical-align: top;\n\tfont-weight: bold;\n\tfont-size: 12px;\n}\n#new-game-btn[data-v-26840de7] {\n\ttext-decoration: none;\n\tcolor: #0c0;\n}\n#new-game-btn[data-v-26840de7]:hover {\n\ttext-decoration: underline;\n}\n.final-score-box[data-v-26840de7] {\n\tfloat: right;\n\tmargin-right: 40px;\n\tvertical-align: top;\n\tborder: solid black 2px;\n\twidth: 120px;\n\theight: 90px;\n}\n.header[data-v-26840de7] {\n\tborder: solid gray 1px;\n\ttext-align: center;\n\tfont-size: 18px;\n\tfont-weight: bold;\n\tline-height: 30px;\n}\n.total[data-v-26840de7] {\n\twidth: 120px;\n\theight: 80px;\n\tvertical-align: top;\n\tline-height: 40px;\n\ttext-align: center;\n\tfont-size: 18px;\n}\n", ""]);
 
 // exports
 
@@ -37891,33 +37890,9 @@ var render = function() {
   return _c(
     "div",
     [
-      _c("p", [_vm._v("Select number of pins knocked over")]),
-      _vm._v(" "),
-      _c(
-        "button",
-        {
-          staticClass: "btn",
-          attrs: {
-            id: "btn0",
-            type: "button",
-            disabled: _vm.disabledBtnArr.includes(0),
-            title: "no pins knocked over",
-            value: "0"
-          },
-          on: {
-            click: function($event) {
-              return _vm.pinBtnClick(
-                0,
-                _vm.rollArr,
-                _vm.frameArr,
-                _vm.disabledBtnArr,
-                _vm.gameOverArr
-              )
-            }
-          }
-        },
-        [_vm._v("0")]
-      ),
+      !_vm.gameOverArr[0]
+        ? _c("p", [_vm._v("Select number of pins knocked over")])
+        : _vm._e(),
       _vm._v(" "),
       _c(
         "button",
@@ -38259,8 +38234,14 @@ var render = function() {
           attrs: {
             bowlingFrames: _vm.bowlingFrames,
             rolls: _vm.rolls,
+            test: false,
             disabledBtns: _vm.disabledBtns,
             gameOver: _vm.gameOver
+          },
+          on: {
+            pinBtnClick: function($event) {
+              _vm.test = true
+            }
           }
         })
       ],
